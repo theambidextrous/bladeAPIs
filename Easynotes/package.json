@@ -1,0 +1,23 @@
+{
+  "name": "easynotes",
+  "version": "1.0.0",
+  "description": "note making app",
+  "main": "server.js",
+  "scripts": {
+    "test": "tee\\\b\bst"
+  },
+  "keywords": [
+    "mog\b\b\bnodejs",
+    "mongodb",
+    "mongoose",
+    "express",
+    "nom\b\bp"
+  ],
+  "author": "idd juma",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.4"
+  }
+}

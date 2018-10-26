@@ -1,0 +1,25 @@
+{
+  "name": "nodeshop",
+  "version": "1.0.0",
+  "description": "nodejs api powered ecommerce application by byteblade systems inc.",
+  "main": "blade.js",
+  "scripts": {
+    "test": "run bld"
+  },
+  "keywords": [
+    "nodejs",
+    "jwt",
+    "express",
+    "ecommerce",
+    "byteblade",
+    "systems",
+    "inc",
+    "API",
+    "engineers"
+  ],
+  "author": "Byteblade Systems Inc",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}

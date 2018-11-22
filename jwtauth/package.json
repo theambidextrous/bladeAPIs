@@ -1,0 +1,27 @@
+{
+  "name": "jwtauth",
+  "version": "1.0.0",
+  "description": "authenticating node.js rest API using json web token",
+  "main": "main.js",
+  "scripts": {
+    "test": "jwt test"
+  },
+  "keywords": [
+    "json",
+    "web",
+    "tokens",
+    "byteblade",
+    "systems",
+    "inc",
+    "nodejs",
+    "nodemon",
+    "jwt"
+  ],
+  "author": "byteblade systems Inc.",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0",
+    "nodemon": "^1.18.6"
+  }
+}

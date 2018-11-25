@@ -1,0 +1,31 @@
+{
+  "name": "nodeshop",
+  "version": "1.0.0",
+  "description": "e-comerce \b\b\b\u001b[C\u001b[C\b\b\b\bmerce shop based on Nodejs RESTful api",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theambidextrous/bladeAPIs.git"
+  },
+  "keywords": [
+    "Byteblade",
+    "Systems",
+    "nodejs",
+    "API",
+    "Restful",
+    "APIs",
+    "API",
+    "powered",
+    "Web",
+    "applications"
+  ],
+  "author": "Byteblade systems Inc",
+  "license": "CC-BY-SA-4.0",
+  "bugs": {
+    "url": "https://github.com/theambidextrous/bladeAPIs/issues"
+  },
+  "homepage": "https://github.com/theambidextrous/bladeAPIs#readme"
+}

@@ -4,7 +4,8 @@
   "description": "authenticating node.js rest API using json web token",
   "main": "main.js",
   "scripts": {
-    "test": "jwt test"
+    "test": "jwt test",
+    "run" : "nodemon main.js"
   },
   "keywords": [
     "json",

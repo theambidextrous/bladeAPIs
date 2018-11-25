@@ -1,0 +1,1 @@
+app.post('/users', [ usersController.insert]);

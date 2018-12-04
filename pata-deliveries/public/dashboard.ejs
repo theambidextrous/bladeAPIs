@@ -1,33 +1,256 @@
-<html>
-    <head>
-        <title>Welcome to Pata-deliveries</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    </head>
-    <body class="container">
-        <div class="page-header">
-            <h1>Pata-deliveries Admin Console</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/public/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="/public/vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="/public/css/style.css">
+  <link rel="shortcut icon" href="/public/images/favicon.png" />
+</head>
+<body>
+  <div class="container-scroller">
+    <!-- Top dashboard nav -->
+    <% include commons/top-dashboard-nav  %>
+    <!-- end top dashboard nav -->
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_sidebar.html -->
+      <% include commons/side-nav %>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-12">
+              <span class="d-flex align-items-center purchase-popup">
+                <p><b><%= message %></b></p>
+                <a href="#"> </a>
+                <a href="#"> </a>
+                <a href="#" style="margin-right: 30px;"> </a>
+                <a href="#" target="_blank" class="btn purchase-button pull-right">View Realtime requests on maps</a>
+              </span>
+            </div>
+          </div>
+          <div class="page-header">
+            <h3 class="page-title">
+              <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-home"></i>                 
+              </span>
+              Dashboard
+            </h3>
+            <nav aria-label="breadcrumb">
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">
+                  <span></span>Overview
+                  <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="row">
+            <div class="col-md-4 stretch-card grid-margin">
+              <div class="card bg-gradient-danger card-img-holder text-white">
+                <div class="card-body">
+                  <img src="/public/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
+                  <h4 class="font-weight-normal mb-3">Deliveries - this month
+                    <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+                  </h4>
+                  <h2 class="mb-5">Units 150,0000</h2>
+                  <h6 class="card-text">Increased by 1.16%</h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 stretch-card grid-margin">
+              <div class="card bg-gradient-info card-img-holder text-white">
+                <div class="card-body">
+                  <img src="/public/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>                  
+                  <h4 class="font-weight-normal mb-3">Service Requests
+                    <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+                  </h4>
+                  <h2 class="mb-5">AVR 6,334</h2>
+                  <h6 class="card-text">Decreased by 1.005%</h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 stretch-card grid-margin">
+              <div class="card bg-gradient-success card-img-holder text-white">
+                <div class="card-body">
+                  <img src="/public/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>                                    
+                  <h4 class="font-weight-normal mb-3">On Transit now
+                    <i class="mdi mdi-diamond mdi-24px float-right"></i>
+                  </h4>
+                  <h2 class="mb-5">Count 7,041</h2>
+                  <h6 class="card-text">Approx. time 1hr 17min</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-7 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="clearfix">
+                    <h4 class="card-title float-left">Deliveries(volumetric weight) VS Value(KES)</h4>
+                    <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div>                                     
+                  </div>
+                  <canvas id="visit-sale-chart" class="mt-4"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-5 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Common trends</h4>
+                  <canvas id="traffic-chart"></canvas>
+                  <div id="traffic-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>                                                      
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Recent Recorded Deliveries</h4>
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>
+                            Shipper
+                          </th>
+                          <th>
+                            Receiver
+                          </th>
+                          <th>
+                            Status
+                          </th>
+                          <th>
+                            Last Update
+                          </th>
+                          <th>
+                            Tracking NO
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <img src="/public/images/faces/face1.jpg" class="mr-2" alt="image">
+                            David Grey
+                          </td>
+                          <td>
+                            Idd juma J
+                          </td>
+                          <td>
+                            <label class="badge badge-gradient-success">DONE</label>
+                          </td>
+                          <td>
+                            Dec 5, 2018
+                          </td>
+                          <td>
+                            WD-12345
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <img src="/public/images/faces/face2.jpg" class="mr-2" alt="image">
+                            Stella Johnson
+                          </td>
+                          <td>
+                           Irene Kimberley
+                          </td>
+                          <td>
+                            <label class="badge badge-gradient-warning">PROGRESS</label>
+                          </td>
+                          <td>
+                            Nov 12, 2018
+                          </td>
+                          <td>
+                            WD-12346
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <img src="/public/images/faces/face2.jpg" class="mr-2" alt="image">
+                            Marina Michel
+                          </td>
+                          <td>
+                           Karimi Ian
+                          </td>
+                          <td>
+                            <label class="badge badge-gradient-info">IN TRANSIT</label>
+                          </td>
+                          <td>
+                            Dec 1, 2018
+                          </td>
+                          <td>
+                            WD-12347
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <img src="/public/images/faces/face2.jpg" class="mr-2" alt="image">
+                            John Doe
+                          </td>
+                          <td>
+                            Wafula Joye
+                          </td>
+                          <td>
+                            <label class="badge badge-gradient-danger">REJECTED</label>
+                          </td>
+                          <td>
+                            Dec 3, 2017
+                          </td>
+                          <td>
+                            WD-12348
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Project Status</h4>
+                  <div class="table-responsive">
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
         </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+       <% include commons/footer %>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
 
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/signup">Sign Up</a></li>
-                        <li><a href="/dashboard">Dashboard</a></li>
-                    </ul>
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/login">Log In</a></li>
-                        <li><a href="/logout">Log Out</a></li>
-                    </ul>
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-        </nav>
-
-        <div class="container row">
-           <h1>Hi, Welcome to your Dashboard</h1>
-        </div>
-    </body>
+  <!-- plugins:js -->
+  <script src="/public/vendors/js/vendor.bundle.base.js"></script>
+  <script src="/public/vendors/js/vendor.bundle.addons.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="/public/js/off-canvas.js"></script>
+  <script src="/public/js/misc.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="/public/js/dashboard.js"></script>
+  <!-- End custom js for this page-->
+</body>
 </html>

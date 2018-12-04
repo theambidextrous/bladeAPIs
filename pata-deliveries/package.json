@@ -5,7 +5,7 @@
   "main": "blade.js",
   "scripts": {
     "test": "rn",
-    "nodemon": "nd"
+    "compile": "nodemon blade.js"
   },
   "keywords": [
     "nodejs",

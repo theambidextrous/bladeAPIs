@@ -39,7 +39,7 @@ app.use((req, res, next) => {
     }
     next();
 });
-// check login
+// check login and go to dashboard
 var sessionChecker = (req, res, next) => {
     if (req.session.user && req.cookies.user_sid) {
         res.redirect('/sys/access/dashboard');
@@ -48,16 +48,18 @@ var sessionChecker = (req, res, next) => {
     }    
 };
 
-// to home/login page>>>
-app.get('/', sessionChecker, (req, res) => {
-    res.render('/sys/access', {
+// to landing page >> route => /sys/access, resource => public/login
+app.get('/sys/access', sessionChecker, (req, res) => {
+    res.render(__dirname + '/public/login', {
         message: "You must be logged in to access this page"
     });
 });
-// to signup>>>
+// to signup page >> route => /sys/access/join, resource => public/register
 app.route('/sys/access/join')
     .get(sessionChecker, (req, res) => {
-        res.render(__dirname + '/public/register');
+        res.render(__dirname + '/public/register', {
+            message:"Login success"
+        });
     })
     .post((req, res) => {
         User.create({
@@ -70,15 +72,15 @@ app.route('/sys/access/join')
             res.redirect('/sys/access/dashboard');
         })
         .catch(error => {
-            res.render('/sys/access/signup', {
-                message: "Some fields are empty"
-            });
+            res.redirect('/sys/access/join');
         });
     });
 // to Login>>>
 app.route('/sys/access')
     .get(sessionChecker, (req, res) => {
-        res.render(__dirname + '/public/login');
+        res.render(__dirname + '/public/login', {
+            message:"Welcome to Pata deliveries"
+        });
     })
     .post((req, res) => {
         var username = req.body.username,
@@ -86,14 +88,10 @@ app.route('/sys/access')
 
         User.findOne({ where: { username: username } }).then(function (user) {
             if (!user) {
-                res.render('/sys/access', {
-                   message:"Invalid access type" 
-                });
+                res.redirect('/sys/access');
             } else if (!user.validPassword(password)) {
                 console.log('Wrong password: ' + password);
-                res.render('/sys/access', {
-                    message:"Wrong login credentials"
-                });
+                res.redirect('/sys/access');
             } else {
                 req.session.user = user.dataValues;
                 console.log('Correct password: ' + password);
@@ -101,12 +99,17 @@ app.route('/sys/access')
             }
         });
     });
-// >>> dashboard
+// to dashboard view >> route => /sys/access/join, resource => public/dashboard
 app.get('/sys/access/dashboard', (req, res) => {
     if (req.session.user && req.cookies.user_sid) {
-        res.render(__dirname + '/public/dashboard');
+        res.render(__dirname + '/public/dashboard', {
+            message:"Welcome to pata deliveries, monitor delivery requests",
+            title:"Pata deliveries dashboard",
+            user:req.session.user,
+            path:__dirname + "/public/"
+        });
     } else {
-        res.render('/sys/access');
+        res.redirect('/sys/access');
     }
 });
 
@@ -114,7 +117,7 @@ app.get('/sys/access/dashboard', (req, res) => {
 app.get('/sys/access/exit', (req, res) => {
     if (req.session.user && req.cookies.user_sid) {
         res.clearCookie('user_sid');
-        res.redirect('/');
+        res.redirect('/sys/access');
     } else {
         res.redirect('/sys/access');
     }

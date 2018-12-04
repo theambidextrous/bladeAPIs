@@ -1,0 +1,36 @@
+{
+  "name": "pata-deliveries",
+  "version": "0.0.0",
+  "description": "patahapa fargo deliveries app for real-time asset tracking",
+  "main": "blade.js",
+  "scripts": {
+    "test": "rn",
+    "nodemon": "nd"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "npm",
+    "byteblade",
+    "systems",
+    "inc",
+    "apis",
+    "jsonwebtoken"
+  ],
+  "author": "Byteblade Systems Inc.",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "daemon": "^1.1.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "morgan": "^1.9.1",
+    "mysql2": "^1.6.4",
+    "nodemon": "^1.18.7",
+    "pg": "^7.7.1",
+    "sequelize": "^4.41.2"
+  }
+}

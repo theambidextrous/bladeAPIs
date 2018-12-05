@@ -105,14 +105,22 @@ app.get('/sys/access/dashboard', (req, res) => {
         res.render(__dirname + '/public/dashboard', {
             message:"Welcome to pata deliveries, monitor delivery requests",
             title:"Pata deliveries dashboard",
-            user:req.session.user,
-            path:__dirname + "/public/"
+            user:req.session.user
         });
     } else {
         res.redirect('/sys/access');
     }
 });
-
+//go to realtime maps
+app.get('/sys/access/realtime',(req, res)=> {
+    if(req.session.user && req.cookies.user_sid){
+        res.render(__dirname + '/public/realtime', {
+            message:"View your assets in realtime",
+            title:"Reatime asset visualization",
+            user:req.session.user
+        })
+    }
+});
 // >>> logout route
 app.get('/sys/access/exit', (req, res) => {
     if (req.session.user && req.cookies.user_sid) {

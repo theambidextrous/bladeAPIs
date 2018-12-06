@@ -7,7 +7,11 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var morgan = require('morgan');
+//models
 var User = require('./models/user');
+var Request = require('./models/requests');
+//end models
+
 //launch express app 
 var app = express();
 //set public fixed dir
@@ -120,6 +124,38 @@ app.get('/sys/access/realtime',(req, res)=> {
             user:req.session.user
         })
     }
+});
+//>>>>add request
+app.route('/sys/access/new-request')
+.get(sessionChecker, (req, res) => {
+    res.render(__dirname + '/public/new-request', {
+        message:"Simulation of service request android app",
+        title:"Create new request",
+        user:req.session.user
+    });
+})
+.post((req, res) => {
+    Request.create({
+        name: req.body.name,
+        email: req.body.email,
+        phone: req.body.phone,
+        address: req.body.address,
+        weight: req.body.weight,
+        volumetric_weight: req.body.volumetric_weight,
+        latitude: req.body.latitude,
+        longtude: req.body.longtude,
+        status: req.body.status
+    })
+    .then(user => {
+        res.render('/sys/access/new-request', {
+            message:"added successfully"
+        });
+    })
+    .catch(error => {
+        res.render('/sys/access/new-request', {
+            error:error
+        });
+    });
 });
 // >>> logout route
 app.get('/sys/access/exit', (req, res) => {
